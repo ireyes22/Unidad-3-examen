@@ -34,6 +34,8 @@ import java.text.SimpleDateFormat;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Control_escolar implements KeyListener{
 
@@ -57,6 +59,7 @@ public class Control_escolar implements KeyListener{
     private JTextField textField_4;
     private JTextField textField_5;
     private JTextField textField_6;
+    private JTable table;
 
 	/**
 	 * Launch the application.
@@ -390,6 +393,14 @@ public class Control_escolar implements KeyListener{
 		panelBotones.add(btnEditar);
 		
 		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(panelMostrar, "panelEliminar");
+				panelEliminar();
+				panelMostrar.validate();
+				panelMostrar.repaint();
+			}
+		});
 		btnEliminar.setIcon(new ImageIcon(Control_escolar.class.getResource("/imagenes/hombre30px.png")));
 		panelBotones.add(btnEliminar);
 		panelBotones.add(btnRegresar);
@@ -399,6 +410,7 @@ public class Control_escolar implements KeyListener{
 		panelConsultar();
 		panelCrearEstudiante();
 		panelEditar();
+		panelEliminar();
 	}
 	
 	public void panelDescargar() {
@@ -719,6 +731,40 @@ public class Control_escolar implements KeyListener{
 	    panelDefault.add(lblNewLabel_14);
 	    
 	    
+	}
+	
+	public void panelEliminar() {
+		JPanel panelEliminar = new JPanel();
+	    panelMostrar.add(panelEliminar, "panelEliminar");
+	    panelEliminar.setLayout(null);
+	    
+	    table = new JTable();
+	    table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+	    table.setFont(new Font("Tahoma", Font.PLAIN, 15));
+	    table.setBounds(20, 49, 643, 160);
+	    table.setModel(new DefaultTableModel(
+	    	new Object[][] {
+	    		{"Matricula", "Nombre", "Apellido paterno", "Apellido materno", "Grupo", "Semestre"},
+	    		{"123456", "Maria", "Reyes", "Bringas", "A", "Segundo"},
+	    		{ null, null, null, null, null, null},
+	    		{ null, null, null, null, null, null},
+	    		{ null, null, null, null, null, null},
+	    		{ null, null, null, null, null, null},
+	    		{ null, null, null, null, null, null},
+	    		{ null, null, null, null, null, null},
+	    		{ null, null, null, null, null, null},
+	    		{ null, null, null, null, null, null},
+	    	},
+	    	new String[] {
+	    		"Matricula", "Nombre", "Apellido paterno", "Apellido materno", "Grupo", "Semestre"
+	    	}
+	    ));
+	    panelEliminar.add(table);
+	    
+	    JLabel lblNewLabel_19 = new JLabel("Estudiantes inscritos");
+	    lblNewLabel_19.setFont(new Font("Tahoma", Font.PLAIN, 15));
+	    lblNewLabel_19.setBounds(20, 26, 169, 13);
+	    panelEliminar.add(lblNewLabel_19);
 	}
 	
 	public void panelDocentes() {
